@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project>
   <modelVersion>4.0.0</modelVersion>
   <groupId>maven_practice_programs</groupId>
   <artifactId>maven_practice_programs</artifactId>
@@ -19,6 +19,13 @@
 	    <version>7.10.2</version>
 	    <scope>test</scope>
 	</dependency>
- 
+	
+		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+	<dependency>
+	    <groupId>com.aventstack</groupId>
+	    <artifactId>extentreports</artifactId>
+	    <version>5.0.3</version>
+	</dependency>
+
   </dependencies>
 </project>
