@@ -38,6 +38,8 @@ public class GmoOnlinewithPOMandPropertiesFile extends Library
 		
 		String totalPriceFromApp = objGmoOnlinePOM.totalPriceFromApp.getText();
 		System.out.println("totalPriceFromApp :" +totalPriceFromApp);
+		//String totalPriceFromAppWithoutDollar = totalPriceFromApp.substring(2);
+		//Float totalPriceFromAppWithoutDollarinFloat = Float.parseFloat(totalPriceFromAppWithoutDollar);
 		String actualTotalPriceFromAppWithoutDollar = totalPriceFromApp.substring(Constants.UnitPriceSubStringIndex);
 		System.out.println("actualTotalPriceFromAppWithoutDollar :" +actualTotalPriceFromAppWithoutDollar);
 		float calculatedFloatValueOfTotalPriceFromApp = Float.parseFloat(actualTotalPriceFromAppWithoutDollar);

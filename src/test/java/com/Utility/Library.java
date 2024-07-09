@@ -58,4 +58,9 @@ public class Library
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.ImplicitWaitTimeOut));
 	}
 	
+	public void PageLoadTimeOut(int seconds)
+	{
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(seconds));
+	}
+	
 }
