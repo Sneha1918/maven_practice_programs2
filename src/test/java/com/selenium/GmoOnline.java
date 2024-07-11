@@ -45,6 +45,46 @@ public class GmoOnline extends Library
 		
 		Assert.assertEquals(calculatedValueOfUnitPrice, calculatedFloatValueOfTotalPriceFromApp);
 		
+		String productTotalFromApp = objGmoOnlinePOM.productTotalFromApp.getText();
+		System.out.println("productTotalFromApp :" +productTotalFromApp);
+		String productTotalFromAppWithoutDollar = productTotalFromApp.substring(2);
+		System.out.println("productTotalFromAppWithoutDollar :" +productTotalFromAppWithoutDollar);
+		float floatValueOfProductTotal = Float.parseFloat(productTotalFromAppWithoutDollar);
+		System.out.println("floatValueOfProductTotal :" +floatValueOfProductTotal);
+		
+		String slaesTaxFromApp = objGmoOnlinePOM.slaesTaxFromApp.getText();
+		System.out.println("slaesTaxFromApp :" +slaesTaxFromApp);
+		String slaesTaxFromAppWithoutDollar = slaesTaxFromApp.substring(2);
+		System.out.println("slaesTaxFromAppWithoutDollar :" +slaesTaxFromAppWithoutDollar);
+		float floatValueOfSlaesTax = Float.parseFloat(slaesTaxFromAppWithoutDollar);
+		System.out.println("floatValueOfSlaesTax :" +floatValueOfSlaesTax);
+		
+		String shippingAndHandlingFromApp = objGmoOnlinePOM.shippingAndHandlingFromApp.getText();
+		System.out.println("shippingAndHandlingFromApp :" +shippingAndHandlingFromApp);
+		String shippingAndHandlingFromAppWithoutDollar = shippingAndHandlingFromApp.substring(2);
+		System.out.println("shippingAndHandlingFromAppWithoutDollar :" +shippingAndHandlingFromAppWithoutDollar);
+		float floatValueOfShippingAndHandling = Float.parseFloat(shippingAndHandlingFromAppWithoutDollar);
+		System.out.println("floatValueOfShippingAndHandling :" +floatValueOfShippingAndHandling);
+
+		float calculatedValueOfGrandTotal = floatValueOfProductTotal+floatValueOfSlaesTax+floatValueOfShippingAndHandling;
+		System.out.println("calculatedValueOfGrandTotal :" +calculatedValueOfGrandTotal);
+		
+		String grandTotalFromApp = objGmoOnlinePOM.grandTotalFromApp.getText();
+		System.out.println("grandTotalFromApp :" +grandTotalFromApp);
+		String grandTotalFromAppWithoutDollar = grandTotalFromApp.substring(2);
+		System.out.println("grandTotalFromAppWithoutDollar :" +grandTotalFromAppWithoutDollar);
+		float floatValueOfGrandTotalFromApp = Float.parseFloat(grandTotalFromAppWithoutDollar);
+		System.out.println("floatValueOfGrandTotal :" +floatValueOfGrandTotalFromApp);
+		
+		try 
+		{
+			Assert.assertEquals(floatValueOfGrandTotalFromApp,calculatedValueOfGrandTotal);
+			System.out.println("floatValueOfGrandTotal & calculatedValueOfGrandTotal are equal");
+		} catch (Exception e) 
+		{
+			System.out.println("floatValueOfGrandTotal & calculatedValueOfGrandTotal are not equal");
+		}
+	
 		//driver.close();
 	}
 }

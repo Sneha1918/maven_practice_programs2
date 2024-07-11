@@ -20,9 +20,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
-public class ValidateGmoOnlineSunGlassesFlow extends Library {
+public class ValidateGmoOnlineSunGlassesFlow extends Library 
+{
 	@Test(priority = 0)
-	public void ValidateLaunchOfGmoOnlineApplication() {
+	public void ValidateLaunchOfGmoOnlineApplication() 
+	{
 		System.out.println("inside ValidateLaunchOfGmoOnlineApplication");
 		driver.get(objProp.getProperty("GmoOnlineAppUrl"));
 		PageLoadTimeOut(Constants.PageLoadTimeOut);
@@ -31,7 +33,8 @@ public class ValidateGmoOnlineSunGlassesFlow extends Library {
 	}
 
 	@Test(priority = 1,dependsOnMethods = {"ValidateLaunchOfGmoOnlineApplication"})
-	public void ValidateGlacierSunGlassesProduct() throws InterruptedException {
+	public void ValidateGlacierSunGlassesProduct() throws InterruptedException 
+	{
 		GmoOnlinePOM objPOM = new GmoOnlinePOM(driver);
 		objPOM.EnterGmoOnline.click();
 		PageLoadTimeOut(Constants.PageLoadTimeOut);
@@ -46,7 +49,8 @@ public class ValidateGmoOnlineSunGlassesFlow extends Library {
 	}
 
 	@Test(priority = 2,dependsOnMethods = {"ValidateLaunchOfGmoOnlineApplication","ValidateGlacierSunGlassesProduct"})
-	public void ValidatePriceCalculationOnPlaceOrderPage() {
+	public void ValidatePriceCalculationOnPlaceOrderPage() 
+	{
 		String titleOfPlaceOrder = driver.getTitle();
 		SoftAssert objSoftAssert = new SoftAssert();
 		objSoftAssert.assertEquals(titleOfPlaceOrder, objProp.getProperty("TitleOfPlaceOrderPage"));
@@ -70,50 +74,106 @@ public class ValidateGmoOnlineSunGlassesFlow extends Library {
 		
 		objSoftAssert.assertAll();
 	}
-
+	
+	@Test(priority=3,dependsOnMethods = {"ValidateLaunchOfGmoOnlineApplication","ValidateGlacierSunGlassesProduct","ValidatePriceCalculationOnPlaceOrderPage"})
+	public void ValidateGrandTotal()
+	{
+		GmoOnlinePOM objPOM = new GmoOnlinePOM(driver);
+		String productTotalFromApp = objPOM.productTotalFromApp.getText();
+		System.out.println("productTotalFromApp :" +productTotalFromApp);
+		String productTotalFromAppWithoutDollar = productTotalFromApp.substring(Constants.UnitPriceSubStringIndex);
+		System.out.println("productTotalFromAppWithoutDollar :" +productTotalFromAppWithoutDollar);
+		float floatValueOfProductTotal = Float.parseFloat(productTotalFromAppWithoutDollar);
+		System.out.println("floatValueOfProductTotal :" +floatValueOfProductTotal);
+		
+		String slaesTaxFromApp = objPOM.slaesTaxFromApp.getText();
+		System.out.println("slaesTaxFromApp :" +slaesTaxFromApp);
+		String slaesTaxFromAppWithoutDollar = slaesTaxFromApp.substring(Constants.UnitPriceSubStringIndex);
+		System.out.println("slaesTaxFromAppWithoutDollar :" +slaesTaxFromAppWithoutDollar);
+		float floatValueOfSlaesTax = Float.parseFloat(slaesTaxFromAppWithoutDollar);
+		System.out.println("floatValueOfSlaesTax :" +floatValueOfSlaesTax);
+		
+		String shippingAndHandlingFromApp = objPOM.shippingAndHandlingFromApp.getText();
+		System.out.println("shippingAndHandlingFromApp :" +shippingAndHandlingFromApp);
+		String shippingAndHandlingFromAppWithoutDollar = shippingAndHandlingFromApp.substring(Constants.UnitPriceSubStringIndex);
+		System.out.println("shippingAndHandlingFromAppWithoutDollar :" +shippingAndHandlingFromAppWithoutDollar);
+		float floatValueOfShippingAndHandling = Float.parseFloat(shippingAndHandlingFromAppWithoutDollar);
+		System.out.println("floatValueOfShippingAndHandling :" +floatValueOfShippingAndHandling);
+		
+		float calculatedValueOfGrandTotal = floatValueOfProductTotal+floatValueOfSlaesTax+floatValueOfShippingAndHandling;
+		System.out.println("calculatedValueOfGrandTotal :" +calculatedValueOfGrandTotal);
+		
+		String grandTotalFromApp = objPOM.grandTotalFromApp.getText();
+		System.out.println("grandTotalFromApp :" +grandTotalFromApp);
+		String grandTotalFromAppWithoutDollar = grandTotalFromApp.substring(Constants.UnitPriceSubStringIndex);
+		System.out.println("grandTotalFromAppWithoutDollar :" +grandTotalFromAppWithoutDollar);
+		float floatValueOfGrandTotalFromApp = Float.parseFloat(grandTotalFromAppWithoutDollar);
+		System.out.println("floatValueOfGrandTotal :" +floatValueOfGrandTotalFromApp);
+		
+		try 
+		{
+			Assert.assertEquals(floatValueOfGrandTotalFromApp,calculatedValueOfGrandTotal);
+			System.out.println("floatValueOfGrandTotal & calculatedValueOfGrandTotal are equal");
+		} catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+	
+	}
+	
 	@BeforeMethod
-	public void beforeMethod() {
+	public void beforeMethod() 
+	{
 		System.out.println("inside beforeMethod");
 	}
 
 	@AfterMethod
-	public void afterMethod() {
+	public void afterMethod() 
+	{
 		System.out.println("inside afterMethod");
 	}
 
 	@BeforeClass
-	public void beforeClass() {
+	public void beforeClass() 
+	{
 		System.out.println("inside beforeClass");
 	}
 
 	@AfterClass
-	public void afterClass() {
+	public void afterClass() 
+	{
 		System.out.println("inside afterClass");
 	}
 
 	@BeforeTest
-	public void beforeTest() {
+	public void beforeTest() 
+	{
 		System.out.println("inside beforeTest");
 		LaunchBrowser();
 	}
 
 	@AfterTest
-	public void afterTest() {
+	public void afterTest() 
+	{
 		System.out.println("inside afterTest");
 	}
 
 	@BeforeSuite
-	public void beforeSuite() {
+	public void beforeSuite() 
+	{
 		System.out.println("inside beforeSuite");
-		try {
+		try 
+		{
 			ReadPropertiesFiles();
-		} catch (IOException e) {
+		} catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
 	}
 
 	@AfterSuite
-	public void afterSuite() {
+	public void afterSuite() 
+	{
 		System.out.println("inside afterSuite");
 	}
 

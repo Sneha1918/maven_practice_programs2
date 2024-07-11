@@ -30,4 +30,15 @@ public class GmoOnlinePOM
 	@FindBy(xpath="//table[@cellpadding='4' and @border='1']/tbody/tr[2]/td[5]")
 	public WebElement totalPriceFromApp;
 	
+	@FindBy(xpath="//table[@cellpadding='4' and @border='1']/tbody/tr[4]/td[2]")
+	public WebElement slaesTaxFromApp;
+	
+	@FindBy(xpath="//table[@cellpadding='4' and @border='1']/tbody/tr[5]/td[2]")
+	public WebElement shippingAndHandlingFromApp;
+	
+	@FindBy(xpath="//table[@cellpadding='4' and @border='1']/tbody/tr[6]/td[2]")
+	public WebElement grandTotalFromApp;
+	
+	@FindBy(xpath="//table[@cellpadding='4' and @border='1']/tbody/tr[3]/td[3]")
+	public WebElement productTotalFromApp;
 }
