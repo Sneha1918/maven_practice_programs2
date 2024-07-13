@@ -27,7 +27,7 @@ public class Library
 			objProp = new Properties();
 			objProp.load(ObjFileInput);
 			System.out.println(objProp.getProperty("browser"));
-			System.out.println(objProp.getProperty("GmoOnlineAppUrl"));
+			//System.out.println(objProp.getProperty("GmoOnlineAppUrl"));
 		} catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
