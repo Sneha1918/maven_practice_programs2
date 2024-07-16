@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.time.Duration;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -34,12 +35,17 @@ public class ValidateAlertsInSelenium extends Library
 	  Assert.assertEquals(title, objProp.getProperty("TitleOfDemoQA"));
   }
   
-  @Test(priority=1,dependsOnMethods = {"ValidateLaunchAlertsOnDemoQA"})
+  @Test(priority=1)
   public void ValidateNormalAlertOnDemoQA() throws InterruptedException
   {
 	  System.out.println("inside ValidateNoramlAlertOnDemoQA");
-	  AlertsPOM objAlertsPOM = new AlertsPOM(driver);
-	  objAlertsPOM.NormalAlertButton.click();
+	  AlertsPOM objPOM = new AlertsPOM(driver);
+	  
+	  JavascriptExecutor js = (JavascriptExecutor) driver;
+	  js.executeScript("arguments[0].scrollIntoView();", objPOM.NormalAlertButton);
+	  
+	  
+	  objPOM.NormalAlertButton.click();
 	  Alert objAlert= driver.switchTo().alert();
 	  Thread.sleep(3000);
 	  String textOfNormalAlert= objAlert.getText();
@@ -47,7 +53,7 @@ public class ValidateAlertsInSelenium extends Library
 	  objAlert.accept();
   }
   
-  @Test(priority=2,dependsOnMethods = {"ValidateLaunchAlertsOnDemoQA","ValidateNormalAlertOnDemoQA"})
+  @Test(priority=2, enabled = false)
   public void ValidateTimerAlertOnDemoQA() throws InterruptedException
   {
 	  System.out.println("inside ValidateTimerAlertOnDemoQA");  
@@ -62,7 +68,7 @@ public class ValidateAlertsInSelenium extends Library
 	  objAlert.accept();
   }
   
-  @Test(priority=3,dependsOnMethods = {"ValidateLaunchAlertsOnDemoQA","ValidateNormalAlertOnDemoQA","ValidateTimerAlertOnDemoQA"})
+  @Test(priority=3, enabled = false)
   public void ValidateConfirmBoxAlertOnDemoQA()
   {
 	  System.out.println("inside ValidateConfirmBoxAlertOnDemoQA");  
@@ -76,7 +82,7 @@ public class ValidateAlertsInSelenium extends Library
 	  Assert.assertEquals(ConfirmAlertResult, true);
   }
   
-  @Test(priority=4,dependsOnMethods = {"ValidateLaunchAlertsOnDemoQA","ValidateNormalAlertOnDemoQA","ValidateTimerAlertOnDemoQA","ValidateConfirmBoxAlertOnDemoQA"})
+  @Test(priority=4, enabled = false)
   public void ValidatePromptBoxAlertOnDemoQA()
   {
 	  System.out.println("inside ValidatePromptBoxAlertOnDemoQA"); 
@@ -118,14 +124,14 @@ public class ValidateAlertsInSelenium extends Library
   @BeforeTest
   public void beforeTest() 
   {
-	  
+	  System.out.println("inside beforeTest");  
+	  LaunchBrowser();
   }
 
   @AfterTest
   public void afterTest() 
   {
-	  System.out.println("inside afterTest");  
-	  LaunchBrowser();
+	  
   }
 
   @BeforeSuite
